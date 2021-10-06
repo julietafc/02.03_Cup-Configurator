@@ -6,7 +6,7 @@ const features = {
   led: false,
   propeller: false,
   shield: false,
-  solarfan: false
+  solarfan: false,
 };
 
 window.addEventListener("DOMContentLoaded", start);
@@ -14,7 +14,7 @@ window.addEventListener("DOMContentLoaded", start);
 function start() {
   console.log("start");
   // register toggle-clicks
-  document.querySelectorAll(".option").forEach(option => option.addEventListener("click", toggleOption));
+  document.querySelectorAll(".option").forEach((option) => option.addEventListener("click", toggleOption));
 }
 
 function toggleOption(event) {
@@ -22,6 +22,12 @@ function toggleOption(event) {
   const feature = target.dataset.feature;
 
   // TODO: Toggle feature in "model"
+
+  if (features[feature] === false) {
+    features[feature] = true;
+  } else {
+    features[feature] = false;
+  }
 
   // If feature is (now) turned on:
   // - mark target as chosen (add class "chosen")
@@ -36,19 +42,25 @@ function toggleOption(event) {
   // - find the existing featureElement in #selected ul
   // - create FLIP-animation to animate featureElement to img in target
   // - when animation is complete, remove featureElement from the DOM
-  
+
+  // If feature is (now) turned on:
   if (features[feature]) {
     // feature added
     console.log(`Feature ${feature} is turned on!`);
+    // - mark target as chosen (add class "chosen")
+    target.classList.add("chosen");
+    // - un-hide the feature-layer(s) in the #product-preview;
+    document.querySelector(`[data-feature=${feature}]`).classList.remove("hide");
 
     // TODO: More code
-
   } else {
     // feature removed
     console.log(`Feature ${feature} is turned off!`);
-    
+    // - no longer mark target as chosen
+    target.classList.remove("chosen");
+    // - hide the feature-layer(s) in the #product-preview
+    document.querySelector(`[data-feature=${feature}]`).classList.add("hide");
     // TODO: More code
-
   }
 }
 
