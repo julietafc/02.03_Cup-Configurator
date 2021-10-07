@@ -49,7 +49,7 @@ function toggleOption(event) {
 
     // - create FLIP-animation to animate featureElement from img in target, to
     //   its intended position. Do it with normal animation or transition class!
-    const firstFrame = document.querySelector("#options").getBoundingClientRect();
+    const firstFrame = target.querySelector("img").getBoundingClientRect();
     const lastFrame = featureElement.getBoundingClientRect();
     console.log(firstFrame, lastFrame);
 
